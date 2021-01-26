@@ -84,4 +84,44 @@ public class MatrixCheckTest {
         char[] except = {'X', 'X', 'X'};
         assertThat(result, is(except));
     }
+
+    @Test
+    public void whenDataMonoByTrueThenTrue() {
+        char[][] input = {
+                {' ', ' ', 'X', ' ', ' '},
+                {' ', ' ', 'X', ' ', ' '},
+                {' ', ' ', 'X', ' ', ' '},
+                {' ', ' ', 'X', ' ', ' '},
+                {' ', ' ', 'X', ' ', ' '}
+        };
+        boolean result = MatrixCheck.isWin(input);
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void whenDataMonoByTrueThenFalse() {
+        char[][] input = {
+                {' ', ' ', 'X', ' ', ' '},
+                {' ', ' ', 'X', ' ', ' '},
+                {' ', 'X', ' ', ' ', ' '},
+                {' ', ' ', 'X', ' ', ' '},
+                {' ', ' ', 'X', ' ', ' '}
+        };
+        boolean result = MatrixCheck.isWin(input);
+        assertThat(result, is(false));
+    }
+
+    @Test
+    public void whenDataMonoByTrueThenTrue1() {
+        char[][] input = {
+                {' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' '},
+                {'X', 'X', 'X', 'X', 'X'},
+                {' ', ' ', 'X', ' ', ' '},
+                {' ', ' ', 'X', ' ', ' '}
+        };
+
+        boolean result = MatrixCheck.isWin(input);
+        assertThat(result, is(true));
+    }
 }
