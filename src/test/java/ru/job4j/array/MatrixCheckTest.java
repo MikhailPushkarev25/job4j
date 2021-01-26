@@ -72,4 +72,16 @@ public class MatrixCheckTest {
         boolean result = MatrixCheck.monoVertical(input, 0);
         assertThat(result, is(true));
     }
+
+    @Test
+    public void whenDiagonal() {
+        char[][] input = {
+                {'X', ' ', ' '},
+                {' ', 'X', ' '},
+                {' ', ' ', 'X'}
+        };
+        char[] result = MatrixCheck.extractDiagonal(input);
+        char[] except = {'X', 'X', 'X'};
+        assertThat(result, is(except));
+    }
 }
