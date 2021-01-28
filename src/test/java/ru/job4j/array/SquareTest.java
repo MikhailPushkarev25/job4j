@@ -10,7 +10,7 @@ public class SquareTest {
     @Test
     public void whenBound3Then014() {
         int bound = 3;
-        int rst[] = Square.calculate(bound);
+        int[] rst = Square.calculate(bound);
         int[] expected = new int[] {0, 1, 4};
         assertThat(rst, is(expected));
     }

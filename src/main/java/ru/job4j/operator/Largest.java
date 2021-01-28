@@ -14,7 +14,7 @@ public class Largest {
 
     public static int whenMax(int first, int second, int third) {
         int result = 0;
-        if(first > second) {
+        if (first > second) {
             result = first;
         } else {
             result = second;

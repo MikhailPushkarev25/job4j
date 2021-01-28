@@ -9,7 +9,7 @@ public class SwitchArrayTest {
 
     @Test
     public void whenSwap0To3() {
-        int[] input = {1,2,3,4};
+        int[] input = {1, 2, 3, 4};
         int[] expected = {4, 2, 3, 1};
         int[] rs1 = SwitchArray.swap(input, 0, input.length - 1);
         assertThat(rs1, is(expected));
@@ -19,7 +19,7 @@ public class SwitchArrayTest {
     public void whenSwap1To3() {
         int[] input = {1, 2, 3, 4, 5, 6};
         int[] expected = {1, 4, 3, 2, 5, 6};
-        int[] rst = SwitchArray.swap(input, 1,3);
+        int[] rst = SwitchArray.swap(input, 1, 3);
         assertThat(rst, is(expected));
     }
 

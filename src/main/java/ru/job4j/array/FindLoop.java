@@ -12,6 +12,7 @@ public class FindLoop {
         }
         return rst;
     }
+
     public static int indexOf(int[] data, int el) {
         int rs1 = -1;
         for (int i = 0; i < data.length; i++) {

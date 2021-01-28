@@ -10,6 +10,7 @@ public class Cinema {
             System.out.println("It is not for you.");
         }
     }
+
     public static void main(String[] args) {
         access(21);
         access(16);

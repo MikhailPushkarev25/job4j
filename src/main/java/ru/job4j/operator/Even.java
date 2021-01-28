@@ -11,6 +11,7 @@ public class Even {
         }
         return i;
     }
+
     public static void main(String[] args) {
         int result = Even.ev(2, 2);
         System.out.println(result);

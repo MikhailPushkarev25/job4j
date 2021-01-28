@@ -13,6 +13,7 @@ public class Sum {
         }
         return i;
     }
+
     public static void main(String[] args) {
         int result = Sum.summation(-1, 2, -7);
         System.out.println(result);
