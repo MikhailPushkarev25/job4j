@@ -1,8 +1,7 @@
 package ru.job4j.array;
 
-import ru.job4j.Calculator;
-
 public class Square {
+
     public static int[] calculate(int bound) {
         int[] rs1 = new int[bound];
         for (int i = 0; i < rs1.length; i++) {
@@ -10,6 +9,7 @@ public class Square {
         }
         return rs1;
     }
+
     public static void main(String[] args) {
         int[] result = Square.calculate(4);
         for (int i = 0; i < result.length; i++) {
