@@ -7,7 +7,9 @@ public class JSONReport extends TextReport {
      * @param name - параметр
      * @param body - параметр
      * @return - возвращает результат
+     * Добавил аннотацию проверил правильность именования метода
      */
+    @Override
     public String generate(String name, String body) {
         return "{" + System.lineSeparator() +
                   "name" + " : " + name + "," + System.lineSeparator()
