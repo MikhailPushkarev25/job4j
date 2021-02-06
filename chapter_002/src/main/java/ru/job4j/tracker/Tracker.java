@@ -113,4 +113,20 @@ public class Tracker {
         }
         return b;
     }
+
+    /**
+     * Этот метод удаляет заявку по id
+     * @param id - параметр
+     * @return - параметр
+     */
+    public boolean delete(int id) {
+        boolean b = false;
+        int index = indexOf(id);
+        if (index != -1) {
+            System.arraycopy(items, index + 1, items, index, size - index);
+            items[size - 1] = null;
+            size--;
+        }
+        return b;
+    }
 }
