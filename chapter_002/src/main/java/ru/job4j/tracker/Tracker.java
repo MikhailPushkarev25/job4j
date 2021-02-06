@@ -78,13 +78,39 @@ public class Tracker {
      * @return - возврат результата
      */
     public Item findById(int id) {
-        Item item = null;
+       int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+
+    /**
+     * Этот метод ищет id по индексу если они равны
+     * @param id - параметр
+     * @return - возврат результата
+     */
+    private int indexOf(int id) {
+        int rsl = -1;
         for (int i = 0; i < size; i++) {
-            if (id == items[i].getId()) {
-                item = items[i];
-                break;
+            if (items[i].getId() == id) {
+                rsl = i;
             }
         }
-        return item;
+        return rsl;
+    }
+
+    /**
+     * Этот метод меняет заявку на другую при этом сохраняя старую
+     * @param id - парметр
+     * @param item - параметр
+     * @return - возврат результата
+     */
+    public boolean replace(int id, Item item) {
+        boolean b = false;
+        int index = indexOf(id);
+        if (index != -1) {
+            item.setId(id);
+            items[index] = item;
+            b = true;
+        }
+        return b;
     }
 }
