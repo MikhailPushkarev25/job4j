@@ -1,5 +1,13 @@
 package ru.job4j.tracker;
 
+/**
+ * @author Mikhail Pushkarev
+ * @since 06.2021
+ * @version 2.2
+ * Это модель данных
+ * содержит всю необходимую информацию
+ * найти можно с пощью класса tracker
+ */
 public class Item {
 
     private int id;
