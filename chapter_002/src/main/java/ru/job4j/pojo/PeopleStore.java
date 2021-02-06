@@ -43,5 +43,11 @@ public class PeopleStore {
                 System.out.println(people1.getName());
             }
         }
+        System.out.println();
+        People first = new People("Mikhail", 25);
+        People second = new People("Mikhail", 25);
+        boolean pop = first.equals(second);
+        System.out.println(pop);
+
     }
 }

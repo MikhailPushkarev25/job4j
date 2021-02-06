@@ -1,5 +1,7 @@
 package ru.job4j.pojo;
 
+import java.util.Objects;
+
 /**
  * @author Mikhail Pushkarev
  * @since 06.02.2021
@@ -23,6 +25,27 @@ public class People {
     public People(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    /**
+     * Так же в этом классе я переопределил метод equals
+     * для сревнения ссылочных переменных
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        People people = (People) o;
+        return age == people.age && Objects.equals(name, people.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
     }
 
     public String getName() {
