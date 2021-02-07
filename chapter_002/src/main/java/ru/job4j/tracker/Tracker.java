@@ -40,14 +40,14 @@ public class Tracker {
 
     public Item[] findAll() {
         Item[] input = new Item[items.length];
+        int count = 0;
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
-                input[size] = items[i];
-                size++;
+                input[count] = items[i];
+                count++;
             }
         }
-        input = Arrays.copyOf(input, size);
-        return input;
+        return Arrays.copyOf(input, count);
     }
 
     /**
@@ -59,14 +59,14 @@ public class Tracker {
      * @return - возврат результата
      */
     public Item[] findByName(String key) {
-       Item[] input = new Item[items.length];
-       for (int i = 0; i < items.length; i++) {
-           if (key.equals(items[i].getName())) {
-               input[size++] = items[i];
-               size++;
+       Item[] input = new Item[size];
+       int count = 0;
+       for (int i = 0; i < size; i++) {
+           if (items[i].getName().equals(key)) {
+               input[count++] = items[i];
            }
        }
-        input = Arrays.copyOf(input, size);
+        input = Arrays.copyOf(input, count);
        return input;
     }
 
@@ -92,6 +92,7 @@ public class Tracker {
         for (int i = 0; i < size; i++) {
             if (items[i].getId() == id) {
                 rsl = i;
+                break;
             }
         }
         return rsl;
@@ -107,7 +108,7 @@ public class Tracker {
         boolean b = false;
         int index = indexOf(id);
         if (index != -1) {
-            item.setId(id);
+            item.setId(items[index].getId());
             items[index] = item;
             b = true;
         }
@@ -126,6 +127,7 @@ public class Tracker {
             System.arraycopy(items, index + 1, items, index, size - index);
             items[size - 1] = null;
             size--;
+            b = true;
         }
         return b;
     }
