@@ -26,12 +26,13 @@ public class StartUI {
     }
 
     public static void editItem(Input input, Tracker tracker) {
-        System.out.println("=== Delete Item ===");
+        System.out.println("=== Replace item ===");
         int id = input.askInt("Enter id: ");
-        if (tracker.delete(id)) {
-            System.out.println("Successful " + id);
+        Item item = new Item(input.askStr("Enter name: "));
+        if (tracker.replace(id, item)) {
+            System.out.println("Good. Edit end");
         } else {
-            System.out.println("Error " + id);
+            System.out.println("Error. Edit end");
         }
     }
 
@@ -68,7 +69,6 @@ public class StartUI {
             System.out.println("Not found name");
         }
     }
-
 
     public  void init(Input input, Tracker tracker) {
         boolean run = true;
