@@ -31,6 +31,7 @@ public class Bus implements Transport {
         }
         return result;
     }
+
     public static void main(String[] args) {
         Bus bus = new Bus();
         bus.drive();

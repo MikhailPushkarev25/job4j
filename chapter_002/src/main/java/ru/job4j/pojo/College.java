@@ -13,8 +13,6 @@ public class College {
         student.setGroup("17-ЭТКз");
         student.setDate("01.09.2017");
 
-        System.out.println("My name is: " + student.getName() + " "  + student.getPatronymic() + " " +
-                 student.getSurname() + " my group - " + student.getGroup() + " entered in - " +
-                student.getDate());
+        System.out.println("My name is: " + student.getName() + " "  + student.getPatronymic() + " " + student.getSurname() + " my group - " + student.getGroup() + " entered in - " + student.getDate());
     }
 }

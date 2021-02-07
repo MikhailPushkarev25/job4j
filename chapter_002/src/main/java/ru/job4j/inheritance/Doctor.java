@@ -5,7 +5,6 @@ public class Doctor extends Profession {
     private boolean license;
     private int work;
 
-
     public boolean check() {
         return true;
     }

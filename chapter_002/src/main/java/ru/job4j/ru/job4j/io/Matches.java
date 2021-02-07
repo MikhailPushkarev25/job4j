@@ -16,6 +16,7 @@ import java.util.Scanner;
  * Следующее условие if - проверяет кто победитель
  */
 public class Matches {
+    @SuppressWarnings("checkstyle:InnerAssignment")
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Игра 11.");
@@ -26,14 +27,14 @@ public class Matches {
             System.out.println(player + " Введите число от 1 до 3: ");
             int matches = Integer.valueOf(input.nextLine());
             turn = !turn;
-            int size = (count  = count - matches);
+             count = count - matches;
             if (turn || matches == 3 || matches == 2 || matches == 1) {
                 if (player.equals("Первый игрок")) {
                     System.out.println("Первый игрок взял " + matches);
-                    System.out.println("Осталось " + size);
+                    System.out.println("Осталось " + count);
                 } else {
                     System.out.println("Второй игрок взял " + matches);
-                    System.out.println("Осталось " + size);
+                    System.out.println("Осталось " + count);
                 }
             } else {
                 System.out.println("Не допустимое колличество");

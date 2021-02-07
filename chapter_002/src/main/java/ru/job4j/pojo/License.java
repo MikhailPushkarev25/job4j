@@ -40,6 +40,7 @@ public class License {
     public int hashCode() {
         return Objects.hash(owner, model, code, created);
     }
+
     public String getOwner() {
         return owner;
     }
