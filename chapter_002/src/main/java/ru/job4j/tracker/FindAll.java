@@ -6,6 +6,12 @@ package ru.job4j.tracker;
  */
 public class FindAll implements UserAction {
 
+    private final Output out;
+
+    public FindAll(Output out) {
+        this.out = out;
+    }
+
     @Override
     public String name() {
         return "=== Print an element ===";

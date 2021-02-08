@@ -11,10 +11,11 @@ public class StartUITest {
 
     @Test
     public void whenAddItem() {
+        Output output = new ConsoleOutput();
         String[] answers = {"Fix Pc"};
         Input input = new StubInput(answers);
         Tracker tracker = new Tracker();
-        new CreateAction().execute(input, tracker);
+        new CreateAction(output).execute(input, tracker);
         Item created = tracker.findAll()[0];
         Item expected = new Item("Fix Pc");
         assertThat(created.getName(), is(expected.getName()));
@@ -22,6 +23,7 @@ public class StartUITest {
 
     @Test
     public void whenReplaceItem() {
+        Output output = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
         tracker.add(item);
@@ -29,38 +31,41 @@ public class StartUITest {
                 String.valueOf(item.getId()),
                 "replaced item"
         };
-        new ReplaceItem().execute(new StubInput(answers), tracker);
+        new ReplaceItem(output).execute(new StubInput(answers), tracker);
         Item replaced = tracker.findById(item.getId());
         assertThat(replaced.getName(), is("replaced item"));
     }
 
     @Test
     public void whenDeleteItem() {
+        Output output = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {String.valueOf(item.getId())};
-        new DeleteItem().execute(new StubInput(answers), tracker);
+        new DeleteItem(output).execute(new StubInput(answers), tracker);
         Item deleted = tracker.findById(item.getId());
         assertNull(deleted);
     }
 
     @Test
     public void whenCreateItem() {
+        Output output = new ConsoleOutput();
         Input in = new StubInput(
                 new String[] {"0", "Item name", "1"}
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
-                new CreateAction(),
-                new Exit()
+                new CreateAction(output),
+                new Exit(output)
         };
-        new StartUI().init(in, tracker, actions);
+        new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findAll()[0].getName(), is("Item name"));
     }
 
     @Test
     public void whenReplacedItem() {
+        Output output = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
@@ -69,15 +74,16 @@ public class StartUITest {
                 new String[] {"0", str, replacedName,  "1"}
         );
         UserAction[] actions = {
-                new ReplaceItem(),
-                new Exit()
+                new ReplaceItem(output),
+                new Exit(output)
         };
-        new StartUI().init(in, tracker, actions);
+        new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
     }
 
     @Test
     public void whenDeletedItem() {
+        Output output = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Deleted item"));
         String str = String.valueOf(item.getId());
@@ -85,10 +91,26 @@ public class StartUITest {
                 new String[] {"0", str, "1"}
         );
         UserAction[] actions = {
-                new DeleteItem(),
-                new Exit()
+                new DeleteItem(output),
+                new Exit(output)
         };
-        new StartUI().init(in, tracker, actions);
+        new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()), is(nullValue()));
+    }
+
+    @Test
+    public void whenExit() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[] {"0"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new Exit(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        assertThat(out.toString(), is(
+                "Menu." + System.lineSeparator() + "0. Exit" + System.lineSeparator()
+        ));
     }
 }
