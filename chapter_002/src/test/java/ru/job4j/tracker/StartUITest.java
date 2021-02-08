@@ -113,4 +113,30 @@ public class StartUITest {
                 "Menu." + System.lineSeparator() + "0. Exit" + System.lineSeparator()
         ));
     }
+
+    @Test
+    public void findAllAction() {
+       Tracker tracker = new Tracker();
+       Item item = new Item("New item");
+       tracker.add(item);
+       assertThat(tracker.findAll()[0].getName(), is("New item"));
+    }
+
+    @Test
+    public void findByNameAction() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("Name item");
+        tracker.add(item);
+        Item[] result = tracker.findByName(item.getName());
+        assertThat(result[0].getName(), is(item.getName()));
+    }
+
+    @Test
+    public void findByAction() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("Name item");
+        tracker.add(item);
+        int id = item.getId();
+        assertThat(tracker.findById(id).getName(), is(item.getName()));
+    }
 }
