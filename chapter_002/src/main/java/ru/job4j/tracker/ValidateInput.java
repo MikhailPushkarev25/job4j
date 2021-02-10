@@ -8,7 +8,19 @@ package ru.job4j.tracker;
  * В этом классе я проверяю что пользователь ввел строку вместо числа
  * блок try catch поймает ошибку.
  */
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
+    private Output out;
+    private Input in;
+
+    public ValidateInput(Output out, Input in) {
+        this.out = out;
+        this.in = in;
+    }
+
+    @Override
+    public String askStr(String question) {
+        return in.askStr(question);
+    }
 
     @Override
     public int askInt(String question) {
