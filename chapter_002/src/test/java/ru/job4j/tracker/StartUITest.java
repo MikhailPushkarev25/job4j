@@ -139,4 +139,41 @@ public class StartUITest {
         int id = item.getId();
         assertThat(tracker.findById(id).getName(), is(item.getName()));
     }
+
+    @Test
+    public void whenInvalidExit() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[] {"9", "0"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new Exit(out)
+        };
+
+        new StartUI(out).init(in, tracker, actions);
+        assertThat(out.toString(), is(
+
+                String.format(
+                                  "Menu.%n"
+                                + "Wrong input, you can select: 0 ...0%n"
+                                + "Menu.%n"
+                                + "0. Exit%n"
+                )
+        ));
+
+    }
+
+    @Test (expected = NumberFormatException.class)
+    public void whenInvalidExitLine() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[] {"name", "0"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new Exit(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+    }
 }
