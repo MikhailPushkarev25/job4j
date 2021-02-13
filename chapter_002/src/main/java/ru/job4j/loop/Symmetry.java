@@ -12,12 +12,11 @@ package ru.job4j.loop;
 public class Symmetry {
 
     public static boolean check(int i) {
-        boolean result = false;
-        String str = Integer.toString(i);
-        String[] num = str.split("2");
-        for (String n : num) {
-            if (n.charAt(num.length) == n.charAt(num.length)) {
-                 result = true;
+        boolean result = true;
+        String str = String.valueOf(i);
+        for (int index = 0; index < (str.length() / 2); index++) {
+            if (str.charAt(index) != str.charAt(str.length() - index - 1)) {
+                 result = false;
             }
         }
         return result;
