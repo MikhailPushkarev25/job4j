@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Mikhail Pushkarev
  * @since 08.02.2021
@@ -10,6 +13,8 @@ package ru.job4j.tracker;
  * В этом проекте я осуществил разрыв от системы вывода,
  * создал интерфейс и классы, далее в каждом классе добавил конструктор и создал обьект
  * интерфейса.
+ * Так же осуществил рефакторинг проекта.
+ * Убрал массивы и добавил интерфейс List для гибкости кода.
  */
 public class StartUI {
 
@@ -19,24 +24,24 @@ public class StartUI {
         this.out = out;
     }
 
-    public  void init(Input input, Tracker tracker, UserAction[] actions) {
+    public  void init(Input input, Tracker tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
             int select = input.askInt("Select: ");
-            if (select < 0 || select >= actions.length) {
-                out.println("Wrong input, you can select: 0 ..." + (actions.length - 1));
+            if (select < 0 || select >= actions.size()) {
+                out.println("Wrong input, you can select: 0 ..." + (actions.size() - 1));
                 continue;
             }
-            UserAction action = actions[select];
+            UserAction action = actions.get(select);
             run = action.execute(input, tracker);
         }
     }
 
-        private void showMenu(UserAction[] actions) {
+        private void showMenu(List<UserAction> actions) {
             out.println("Menu.");
-            for (int index = 0; index < actions.length; index++) {
-                System.out.println(index + ". " + actions[index].name());
+            for (int index = 0; index < actions.size(); index++) {
+                System.out.println(index + ". " + actions.get(index).name());
             }
         }
 
@@ -44,15 +49,15 @@ public class StartUI {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
         Tracker tracker = new Tracker();
-        UserAction[] action = {
-                new CreateAction(output),
-                new FindAll(output),
-                new ReplaceItem(output),
-                new DeleteItem(output),
-                new FindByIdItem(output),
-                new FindByNameItem(output),
-                new Exit(output)
-        };
+        List<UserAction> action = new ArrayList<>();
+             action.add(new CreateAction(output));
+             action.add(new FindAll(output));
+             action.add(new ReplaceItem(output));
+             action.add(new DeleteItem(output));
+             action.add(new FindByIdItem(output));
+             action.add(new FindByNameItem(output));
+              action.add(new Exit(output));
+
         new StartUI(output).init(input, tracker, action);
     }
 }

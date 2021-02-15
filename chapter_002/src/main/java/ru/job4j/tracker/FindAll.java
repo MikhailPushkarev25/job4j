@@ -1,4 +1,7 @@
 package ru.job4j.tracker;
+
+import java.util.List;
+
 /**
  * @author Mikhail Pushkarev
  * @since 07.02.2021
@@ -19,9 +22,9 @@ public class FindAll implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        Item[] item = tracker.findAll();
-        for (int i = 0; i < item.length; i++) {
-            out.println(item[i]);
+        List<Item> item = tracker.findAll();
+        for (int i = 0; i < item.size(); i++) {
+            out.println(item.get(i));
         }
         return true;
     }

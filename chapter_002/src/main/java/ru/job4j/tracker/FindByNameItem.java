@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * @author Mikhail Pushkarev
  * @since 07.02.2021
@@ -13,7 +15,6 @@ public class FindByNameItem implements UserAction {
         this.out = out;
     }
 
-
     @Override
     public String name() {
         return "=== Search by name ===";
@@ -22,9 +23,9 @@ public class FindByNameItem implements UserAction {
     @Override
     public boolean execute(Input input, Tracker tracker) {
         String name = input.askStr("Enter name: ");
-        Item[] item = tracker.findByName(name);
-        if (item.length > 0) {
-            for (int i = 0; i < item.length; i++) {
+        List<Item> item = tracker.findByName(name);
+        if (item.size() > 0) {
+            for (int i = 0; i < item.size(); i++) {
                 out.println("Successful");
             }
         } else {
