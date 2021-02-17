@@ -57,6 +57,8 @@ public class StartUI {
              action.add(new FindByIdItem(output));
              action.add(new FindByNameItem(output));
               action.add(new Exit(output));
+              new ItemAscendingOrder();
+              new ItemDescending();
 
         new StartUI(output).init(input, tracker, action);
     }

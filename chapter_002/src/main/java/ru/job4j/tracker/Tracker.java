@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -116,5 +117,19 @@ public class Tracker {
             b = true;
         }
         return b;
+    }
+
+    /**
+     * Метод для сортировки данных по возрастанию
+     */
+    public void ascending() {
+        Collections.sort(list, new ItemAscendingOrder());
+    }
+
+    /**
+     * Метод сортировки по уменьшению
+     */
+    public void descending() {
+        Collections.sort(list, new ItemDescending());
     }
 }
