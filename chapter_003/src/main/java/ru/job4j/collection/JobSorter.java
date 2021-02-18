@@ -2,6 +2,7 @@ package ru.job4j.collection;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -25,5 +26,14 @@ public class JobSorter {
         System.out.println(jobs);
         Collections.sort(jobs, new SortByNameJob());
         System.out.println(jobs);
+        System.out.println();
+        /**
+         * инструмент обьединение сортировки по полям, (возрастание и убывание)
+         */
+        Comparator<Job> comb = new JobAscendingName()
+                .thenComparing(new JobAscendingPriority())
+                .thenComparing(new JobDescendingName())
+                .thenComparing(new JobDescendingPriority());
+        Collections.sort(jobs, comb);
     }
 }
