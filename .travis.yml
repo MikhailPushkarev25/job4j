@@ -20,4 +20,4 @@ notifications:
     on_failure: always # default: always
     env:
       global:
-        - CODECOV_TOKEN="f0045e4a-f963-444e-a774-a85ee22d897f"
+        - CODECOV_TOKEN= f0045e4a-f963-444e-a774-a85ee22d897f
