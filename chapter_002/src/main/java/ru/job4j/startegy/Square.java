@@ -8,7 +8,6 @@ package ru.job4j.startegy;
  */
 public class Square implements Shape {
 
-
     @Override
     public String draw() {
         String sqr = System.lineSeparator();

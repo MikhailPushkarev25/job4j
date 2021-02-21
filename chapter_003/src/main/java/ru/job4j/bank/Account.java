@@ -1,17 +1,16 @@
 package ru.job4j.bank;
 
 import java.util.Objects;
-
 /**
- * @author Mikhail Pushkarev
- * @since 16.02.2021
- * @version 2.2
+ *@author Mikhail Pushkarev
+ *@since 16.02.2021
+ *@version 2.2
  *
- * В классе я так же создал модель данных баланс счета в банке.
+ *В классе я так же создал модель данных баланс счета в банке.
  */
 public class Account {
-
     private String requisite;
+
     private double balance;
 
     public Account(String requisite, double balance) {

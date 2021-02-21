@@ -13,7 +13,6 @@ public class CreateAction implements UserAction {
         this.out = out;
     }
 
-
     @Override
     public String name() {
         return "=== Create a new Item ===";

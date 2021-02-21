@@ -13,7 +13,6 @@ public class ReplaceItem implements UserAction {
         this.out = out;
     }
 
-
     @Override
     public String name() {
         return "=== Replace item ===";

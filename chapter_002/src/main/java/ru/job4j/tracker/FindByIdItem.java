@@ -12,7 +12,6 @@ public class FindByIdItem implements UserAction {
         this.out = out;
     }
 
-
     @Override
     public String name() {
         return "=== Search by id ===";

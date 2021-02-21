@@ -7,7 +7,6 @@ public class Exit implements UserAction {
         this.out = out;
     }
 
-
     @Override
     public String name() {
         return "=== Exit program ===";
