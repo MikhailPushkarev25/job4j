@@ -13,6 +13,7 @@ import java.util.List;
  * В классе представлен пример как можно использовать
  * компаратор в виде анонимного класса и не добавлять отдельные классы
  *сортировка по значению и по имени
+ * Рефакторинг  - ипользование лямбд для сокращение кода
  */
 public class AttachmentSort {
     public static void main(String[] args) {
@@ -21,13 +22,7 @@ public class AttachmentSort {
                 new Attachment("Image 2", 34),
                 new Attachment("Image 3", 13)
         );
-        Comparator<Attachment> comparator = new Comparator<Attachment>() {
-
-            @Override
-            public int compare(Attachment o1, Attachment o2) {
-                return o1.getSize() - o2.getSize();
-            }
-        };
+        Comparator<Attachment> comparator = (left, right) -> left.getSize() - right.getSize();
         attachments.sort(comparator);
         System.out.println(attachments);
 
@@ -40,13 +35,12 @@ public class AttachmentSort {
         };
         list.add(100500);
 
-        Comparator<Attachment> comparator1 = new Comparator<Attachment>() {
-            @Override
-            public int compare(Attachment o1, Attachment o2) {
-                return o2.getName().compareTo(o1.getName());
-            }
-        };
+        Comparator<Attachment> comparator1 = (left, right) -> left.getName().compareTo(right.getName());
         attachments.sort(comparator1);
+        System.out.println(attachments);
+
+        Comparator<Attachment> comparator2 = (left, right) -> right.getName().compareTo(left.getName());
+        attachments.sort(comparator2);
         System.out.println(attachments);
     }
 }
