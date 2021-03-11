@@ -21,6 +21,7 @@ public class RefMethod {
         Consumer<String> consumer = RefMethod::cutOut;
         names.forEach(consumer);
     }
+
         public static void cutOut(String value) {
 
         if (value.length() > 10) {
