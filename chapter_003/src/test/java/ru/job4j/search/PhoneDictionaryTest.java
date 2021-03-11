@@ -30,4 +30,14 @@ public class PhoneDictionaryTest {
         ArrayList<Person> persons = phones.find("455555");
         assertThat(persons.get(0).getName(), is("Mikhail"));
     }
+
+    @Test
+    public void whenFindByName() {
+        PhoneDictionary phone = new PhoneDictionary();
+        phone.add(
+                new Person("Petr", "Arsentev", "534872", "Bryansk")
+        );
+        ArrayList<Person> persons = phone.find("Petr");
+        assertThat(persons.get(0).getSurname(), is("Arsentev"));
+    }
 }

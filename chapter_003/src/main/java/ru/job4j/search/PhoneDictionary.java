@@ -1,6 +1,7 @@
 package ru.job4j.search;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 /**
  * @author Mikhail Pushkarev
@@ -28,14 +29,21 @@ public class PhoneDictionary {
      * в любых полях
      * @param key - ключ поиска
      * @return Список подошедших пользователей
+     * В методе приведен пример комбинированной функцции
      */
     public ArrayList<Person> find(String key) {
+        Predicate<Person> combineAddress = x -> x.getAddress().contains(key);
+        Predicate<Person> combinePhone = x -> x.getPhone().contains(key);
+        Predicate<Person> combineName = x -> x.getName().contains(key);
+        Predicate<Person> combineSurname = x -> x.getSurname().contains(key);
+        Predicate<Person> comb = combineAddress.or(combinePhone).or(combineName).or(combineSurname);
         ArrayList<Person> result = new ArrayList<>();
-        for (Person per : persons) {
-            if (key.contains(per.getName()) || key.contains(per.getSurname()) || key.contains(per.getPhone()) || key.contains(per.getAddress())) {
-                result.add(per);
+        for (Person person : persons) {
+            if (comb.test(person)) {
+                result.add(person);
             }
         }
+
         return result;
     }
 }
