@@ -2,13 +2,13 @@ package ru.job4j.jambda;
 
 /**
  * @author Mikhail Pushkarev
- * @since 22.02.2021
+ * @since 11.03.2021
  * @version 2.2
- *
- * Модель данных имени и значений
  */
 public class Attachment {
-
+    /**
+     * В классе я создал модель данных, и поля по которым буду сортировать порядок
+     */
     private String name;
     private int size;
 
