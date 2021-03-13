@@ -2,9 +2,11 @@ package ru.job4j.jambda;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class ProfilesTest {
@@ -34,5 +36,27 @@ public class ProfilesTest {
                 )
         );
         assertThat(prof.get(0).getHome(), is(39));
+    }
+
+    @Test
+    public void whenSortedResultCity() {
+       Address one = new Address("Kstovo", "Belinskogo", 36, 2);
+       Address two = new Address("Moskow", "Lenina", 13, 4);
+       Address three = new Address("Ekaterinburg", "Petrova", 90, 1);
+       Address four = new Address("Kstovo", "Belinskogo", 36, 2);
+
+       List<Profile> profile = Arrays.asList(
+              new Profile(one),
+              new Profile(two),
+               new Profile(three),
+               new Profile(four)
+       );
+       List<Address> address = List.of(
+               three,
+               one,
+               two
+       );
+       List<Address> profiles = Profiles.collect(profile);
+       assertEquals(profiles, address);
     }
 }
