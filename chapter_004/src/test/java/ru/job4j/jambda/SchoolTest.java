@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
@@ -70,5 +71,22 @@ public class SchoolTest {
         expected.add(new Student(30, "Surname3"));
         expected.add(new Student(40, "Surname4"));
         assertThat(rsl, is(expected));
+    }
+
+    @Test
+    public void whenFilterStudents() {
+        List<Student> students = List.of(
+                new Student(10, "Surname1"),
+                new Student(30, "Surname3"),
+                new Student(90, "Surname9")
+        );
+        Map<String, Student> st = School.collector(students);
+        Map<String, Student> expected = Map.of(
+                "Surname1", new Student(10, "Surname1"),
+                "Surname3", new Student(30, "Surname3"),
+                "Surname9", new Student(90, "Surname9")
+        );
+        assertThat(st, is(expected));
+
     }
 }
