@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @author Mikhail Pushkarev
- * @since 16.02.2021
+ * @since 14.03.2021
  * @version 2.2
  *
  * В классе я создал методы добавления, замены, удаления, и пополнения счета.
@@ -52,15 +52,18 @@ public class BankService {
      * если true то возвращаем этот номер.
      * @param passport
      * @return
+     * В методе я совершил рефакторинг,
+     * Stream API- метод принимает данные паспорта,
+     * далее с помощью keySet создаем поток
+     * фильтруем данные, возвращаем обьект в виде Optional
      */
     public User findByPassport(String passport) {
-        User user = null;
-        for (User key : users.keySet()) {
-            if (key.getPassport().equals(passport)) {
-                user = key;
-            }
-        }
-        return user;
+        return users.keySet()
+                .stream()
+                .filter(
+                        s -> s.getPassport().equals(passport)
+                ).findFirst()
+                .orElse(null);
     }
 
     /**
@@ -71,18 +74,23 @@ public class BankService {
      * @param passport - номер паспорта
      * @param requisite - реквизиты
      * @return - возвращаем список
+     * В методе я совершил рефакторинг,
+     *      * Stream API- метод принимает данные паспорта,
+     *      проыеряю что не null
+     *      * далее создаем поток
+     *      * фильтруем данные, возвращаем обьект в виде Optional
      */
     public Account findByRequisite(String passport, String requisite) {
-        Account result = null;
         User user = findByPassport(passport);
         if (user != null) {
-            List<Account> list = users.get(user);
-            for (Account key : list) {
-                key.setRequisite(requisite);
-                result = key;
-            }
+            return users.get(user)
+                    .stream()
+                    .filter(
+                            s -> s.getRequisite().equals(requisite)
+                    ).findFirst()
+                    .orElse(null);
         }
-        return result;
+        return null;
     }
 
     /**
