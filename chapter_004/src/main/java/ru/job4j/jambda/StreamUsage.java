@@ -27,6 +27,7 @@ public class StreamUsage {
             return "Task{" + "name='" + name + '\'' + ", spent=" + spent + '}';
         }
     }
+
     public static void main(String[] args) {
 
         List<Task> tasks = List.of(

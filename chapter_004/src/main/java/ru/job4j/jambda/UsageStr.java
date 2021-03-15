@@ -27,6 +27,7 @@ public class UsageStr {
             return "Number{" + "num=" + num + '}';
         }
     }
+
     public static void main(String[] args) {
         List<Number> num = Arrays.asList(
                 new Number(1),
