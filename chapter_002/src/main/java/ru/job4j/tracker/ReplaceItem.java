@@ -19,7 +19,7 @@ public class ReplaceItem implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         int id = input.askInt("Enter id: ");
         Item item = new Item(input.askStr("Enter name: "));
         if (tracker.replace(id, item)) {

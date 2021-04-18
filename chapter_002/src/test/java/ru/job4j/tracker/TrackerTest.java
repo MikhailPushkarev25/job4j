@@ -12,7 +12,7 @@ public class TrackerTest {
 
     @Test
     public void whenReplace() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item bug = new Item("bug");
         tracker.add(bug);
         int id = bug.getId();
@@ -23,7 +23,7 @@ public class TrackerTest {
 
     @Test
     public void whenDelete() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item bug = new Item("bug");
         tracker.add(bug);
         int id = bug.getId();
@@ -33,7 +33,7 @@ public class TrackerTest {
 
     @Test
     public void whenAscendingTrackerThenItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = new Item("Nikolay");
         Item item1 = new Item("elena");
         Item item2 = new Item("mikhail");
@@ -49,7 +49,7 @@ public class TrackerTest {
 
     @Test
     public void whenDescendingTrackerThenItem() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item item = new Item("mikhail");
         Item item1 = new Item("elena");
         Item item2 = new Item("Nikolay");

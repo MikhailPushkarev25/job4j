@@ -17,6 +17,11 @@ public class Item {
         this.name = name;
     }
 
+    public Item(int id, String name) {
+        this.name = name;
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

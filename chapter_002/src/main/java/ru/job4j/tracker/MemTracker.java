@@ -9,7 +9,7 @@ import java.util.List;
  * @since 06.02.2021
  * @version 2.2
  */
-public class Tracker {
+public class MemTracker implements Store {
 
     /**
      * Поле items - это заявки определенного колличества.
@@ -20,6 +20,11 @@ public class Tracker {
      */
 
     private int ids = 1;
+
+    @Override
+    public void init() {
+
+    }
 
     /**
      * Этот метод добавляет заявки по id
@@ -131,5 +136,10 @@ public class Tracker {
      */
     public void descending() {
         Collections.sort(list, new ItemDescending());
+    }
+
+    @Override
+    public void close() throws Exception {
+
     }
 }
