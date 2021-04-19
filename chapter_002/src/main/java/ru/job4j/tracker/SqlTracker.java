@@ -26,69 +26,94 @@ public class SqlTracker implements Store {
     }
 
     @Override
-    public Item add(Item item) {
-        Item rsl = null;
-        String query = String.format("insert into items(name) values('%s');", item.getName());
-        if (executeQuery(query)) {
-            rsl = item;
-        }
-        return rsl;
-    }
-
-    @Override
-    public boolean replace(int id, Item item) {
-        String query = String.format("update items set name='%s' where id='%s';", item.getName(), id);
-        return executeQuery(query);
-    }
-
-    @Override
-    public boolean delete(int id) {
-        String query = String.format("delete items id='%s';", id);
-        return executeQuery(query);
-    }
-
-    @Override
-    public List<Item> findAll() {
-        List<Item> itemList = new ArrayList<>();
-        String query = "select * from items;";
-        ResultSet rs = resSet(query);
-        try {
-            while (rs.next()) {
-                itemList.add(new Item(rs.getInt("id"), rs.getString("name")));
+    public Item add(Item item) throws SQLException {
+        String query = "insert into items(name) values(?)";
+        try (PreparedStatement statement = cn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, item.getName());
+            statement.execute();
+            try (ResultSet keys = statement.getGeneratedKeys()) {
+                if (keys.next()) {
+                    item.setId(keys.getInt(1));
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return itemList;
-    }
-
-    @Override
-    public List<Item> findByName(String key) {
-        List<Item> itemList = new ArrayList<>();
-        String query = String.format("select * from items where name='%s';", key);
-        ResultSet rs = resSet(query);
-        try {
-            while (rs.next()) {
-                itemList.add(new Item(rs.getInt("id"), rs.getString("name")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return itemList;
-    }
-
-    @Override
-    public Item findById(int id) {
-        Item item = null;
-        String query = String.format("select * format items where id='%s';", id);
-        ResultSet rs = resSet(query);
-        try {
-            rs.next();
-            item = new Item(rs.getInt("id"), rs.getString("name"));
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return item;
+    }
+
+    @Override
+    public boolean replace(int id, Item item) throws SQLException {
+        boolean result;
+        String query = "update items set name=? where id=?";
+        try (PreparedStatement statement = cn.prepareStatement(query)) {
+            statement.setString(1, item.getName());
+            statement.setInt(2, id);
+            result = statement.executeUpdate() > 0;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean delete(int id) throws SQLException {
+        boolean result;
+        String query = "delete from items where id=?";
+       try (PreparedStatement statement = cn.prepareStatement(query)) {
+           statement.setInt(1, id);
+           result = statement.executeUpdate() > 0;
+       }
+       return result;
+    }
+
+    @Override
+    public List<Item> findAll() throws SQLException {
+        List<Item> itemList = new ArrayList<>();
+        String query = "select * from items";
+       try (PreparedStatement statement = cn.prepareStatement(query)) {
+           try (ResultSet rs = statement.executeQuery()) {
+               while (rs.next()) {
+                   itemList.add(new Item(
+                           rs.getInt("id"),
+                           rs.getString("name")
+                   ));
+               }
+           }
+       }
+       return itemList;
+    }
+
+    @Override
+    public List<Item> findByName(String name) throws SQLException {
+        List<Item> itemList = new ArrayList<>();
+        String query = "select * from items where name=?";
+        try (PreparedStatement statement = cn.prepareStatement(query)) {
+            statement.setString(1, name);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    itemList.add(new Item(
+                            rs.getInt("id"),
+                            rs.getString("name")
+                    ));
+                }
+            }
+        }
+        return itemList;
+    }
+
+    @Override
+    public Item findById(int id) throws SQLException {
+        List<Item> itemList = new ArrayList<>();
+        String query = "select * from items where id=?";
+        try (PreparedStatement statement = cn.prepareStatement(query)) {
+            statement.setInt(1, id);
+            try (ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    itemList.add(new Item(
+                            rs.getInt("id"),
+                            rs.getString("name")
+                    ));
+                }
+            }
+        }
+        return itemList.size() > 0 ? itemList.get(0) : null;
     }
 
     @Override
@@ -96,34 +121,5 @@ public class SqlTracker implements Store {
         if (cn != null) {
             cn.close();
         }
-    }
-
-    private boolean executeQuery(String query) {
-        boolean rs = false;
-        try (Statement st = cn.createStatement()) {
-            st.execute(query);
-            if (st.getUpdateCount() > 0) {
-                rs = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    private ResultSet resSet(String query) {
-        ResultSet rs = null;
-
-        try (Statement st = cn.createStatement()) {
-            st.execute(query);
-            rs = st.getResultSet();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    public void createTable(String query) {
-        executeQuery(String.format("create table %s(id serial primary key, name text);", query));
     }
 }

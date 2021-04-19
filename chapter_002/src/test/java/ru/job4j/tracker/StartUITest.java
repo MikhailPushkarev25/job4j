@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +13,8 @@ import static org.junit.Assert.assertThat;
 
 public class StartUITest {
 
-
     @Test
-    public void whenAddItem() {
+    public void whenAddItem() throws SQLException {
         Output output = new ConsoleOutput();
         String[] answers = {"Fix Pc"};
         Input input = new StubInput(answers);
@@ -26,7 +26,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenReplaceItem() {
+    public void whenReplaceItem() throws SQLException {
         Output output = new ConsoleOutput();
         MemTracker tracker = new MemTracker();
         Item item = new Item("new item");
@@ -41,7 +41,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenDeleteItem() {
+    public void whenDeleteItem() throws SQLException {
         Output output = new ConsoleOutput();
         MemTracker tracker = new MemTracker();
         Item item = new Item("new item");
@@ -53,7 +53,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenCreateItem() {
+    public void whenCreateItem() throws SQLException {
         Output output = new ConsoleOutput();
         Input in = new StubInput(
                 new String[] {"0", "Item name", "1"}
@@ -67,7 +67,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenReplacedItem() {
+    public void whenReplacedItem() throws SQLException {
         Output output = new ConsoleOutput();
         MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Replaced item"));
@@ -84,7 +84,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenDeletedItem() {
+    public void whenDeletedItem() throws SQLException {
         Output output = new ConsoleOutput();
         MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Deleted item"));
@@ -100,7 +100,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenExit() {
+    public void whenExit() throws SQLException {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[] {"0"}
@@ -141,7 +141,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenInvalidExit() {
+    public void whenInvalidExit() throws SQLException {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[] {"9", "0"}
@@ -164,7 +164,7 @@ public class StartUITest {
     }
 
     @Test (expected = NumberFormatException.class)
-    public void whenInvalidExitLine() {
+    public void whenInvalidExitLine() throws SQLException {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[] {"name", "0"}

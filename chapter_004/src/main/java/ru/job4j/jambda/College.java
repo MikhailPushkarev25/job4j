@@ -29,7 +29,7 @@ public class College {
         Optional<Students> rsl = Optional.empty();
         for (var stud : students.keySet()) {
 
-            if(account.equals(stud.getAccount())) {
+            if (account.equals(stud.getAccount())) {
                 rsl = Optional.of(stud);
                 break;
             }
@@ -45,7 +45,7 @@ public class College {
             Set<Subject> subjects = students.get(stud.get());
             for (var subj : subjects) {
 
-                if(name.equals(subj.getName())) {
+                if (name.equals(subj.getName())) {
                     rsl = Optional.of(subj);
                     break;
                 }

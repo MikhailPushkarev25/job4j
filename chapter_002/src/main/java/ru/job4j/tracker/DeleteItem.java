@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.sql.SQLException;
+
 /**
  * @author Mikhail Pushkarev
  * @since 07.02.2021
@@ -18,7 +20,7 @@ public class DeleteItem implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Store tracker) {
+    public boolean execute(Input input, Store tracker) throws SQLException {
         int id = input.askInt("Enter id: ");
         if (tracker.delete(id)) {
             out.println("Successful " + id);
