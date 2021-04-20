@@ -21,7 +21,7 @@ public class FindByIdItem implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Store tracker) throws SQLException {
+    public boolean execute(Input input, Store tracker) {
         int id = input.askInt("Enter id: ");
         Item item = tracker.findById(id);
         if (item != null) {
