@@ -1,8 +1,12 @@
 package ru.job4j.tracker;
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Mikhail Pushkarev
@@ -46,10 +50,25 @@ public class StartUI {
             }
         }
 
+        public static Connection sqlInit() {
+            try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+                Properties config = new Properties();
+                config.load(in);
+                Class.forName(config.getProperty("driver-class-name"));
+                return DriverManager.getConnection(
+                        config.getProperty("url"),
+                        config.getProperty("username"),
+                        config.getProperty("password")
+                );
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
-        try (Store tracker = new SqlTracker()) {
+        try (Store tracker = new SqlTracker(ConnectionRollback.create(sqlInit()))) {
             tracker.init();
             List<UserAction> actions = new ArrayList<>();
             actions.add(new CreateAction(output));
