@@ -68,7 +68,7 @@ public class SqlTrackerTest {
           Item item1 = new Item("names");
           tracker.add(item);
           tracker.add(item1);
-           assertThat(tracker.findAll().size(), is(8));
+           assertThat(tracker.findAll().size(), is(2));
         }
     }
 
