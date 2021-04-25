@@ -6,12 +6,10 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class SqlTrackerTest {
 
@@ -75,10 +73,11 @@ public class SqlTrackerTest {
     @Test
     public void findByName() throws SQLException {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
-            Item item = new Item("name");
-            tracker.add(item);
-            List<Item> list = tracker.findByName(item.getName());
-            assertThat(list.get(0).getName(), is("name"));
+            tracker.add(new Item("one"));
+            tracker.add(new Item("two"));
+            tracker.add(new Item("one"));
+            assertEquals(tracker.findByName("one").size(), 1);
+            assertEquals(tracker.findByName("two").size(), 2);
         }
     }
 
