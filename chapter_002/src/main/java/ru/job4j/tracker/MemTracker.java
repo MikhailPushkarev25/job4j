@@ -142,4 +142,13 @@ public class MemTracker implements Store {
     public void close() throws Exception {
 
     }
+
+    public static void main(String[] args) {
+        MemTracker mem = new MemTracker();
+        for (int i = 0; i < 100; i++) {
+            mem.descending();
+            mem.findAll();
+
+        }
+    }
 }
