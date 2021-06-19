@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -68,6 +69,10 @@ public class StartUI {
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
+        Item item = new Item();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
+        String current = item.getCreated().format(formatter);
+        System.out.println(current);
         try (Store tracker = new SqlTracker(ConnectionRollback.create(sqlInit()))) {
             tracker.init();
             List<UserAction> actions = new ArrayList<>();
