@@ -99,14 +99,13 @@ public class MemTracker implements Store {
      * @return - возврат результата
      */
     public boolean replace(int id, Item item) {
-        boolean b = false;
         int index = indexOf(id);
-        if (index != -1) {
+        boolean rsl = index != -1;
+        if (rsl) {
             item.setId(id);
             list.set(index, item);
-            b = true;
         }
-        return b;
+        return rsl;
     }
 
     /**
@@ -115,13 +114,12 @@ public class MemTracker implements Store {
      * @return - параметр
      */
     public boolean delete(int id) {
-        boolean b = false;
         int index = indexOf(id);
-        if (index != -1) {
+        boolean rsl = index != -1;
+        if (rsl) {
             list.remove(index);
-            b = true;
         }
-        return b;
+        return rsl;
     }
 
     /**
@@ -141,14 +139,5 @@ public class MemTracker implements Store {
     @Override
     public void close() throws Exception {
 
-    }
-
-    public static void main(String[] args) {
-        MemTracker mem = new MemTracker();
-        for (int i = 0; i < 100; i++) {
-            mem.descending();
-            mem.findAll();
-
-        }
     }
 }
