@@ -8,7 +8,6 @@ import java.util.Objects;
  *
  *В классе я так же создал модель данных баланс счета в банке.
  */
-
 public class Account {
     private String requisite;
 

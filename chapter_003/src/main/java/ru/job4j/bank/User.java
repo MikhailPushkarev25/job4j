@@ -8,7 +8,6 @@ import java.util.Objects;
  * @version 2.2
  * В классе я создал модель данных пользователя.
  */
-
 public class User {
 
     private String passport;
