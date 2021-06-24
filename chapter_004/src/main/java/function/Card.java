@@ -16,7 +16,6 @@ enum Value {
      private Value value;
 
      public static void main(String[] args) {
-
          Stream.of(Suit.values())
                  .flatMap(suit -> Stream.of(Value.values())
                  .map(v -> suit + " " + v))
