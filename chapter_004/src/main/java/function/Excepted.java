@@ -23,7 +23,7 @@ public class Excepted {
 
         Comparator<String> lengthCmp = (left, right) -> {
             System.out.println("execute comparator");
-            return left.length() - right.length();
+            return Integer.compare(left.length(), right.length());
         };
         Arrays.sort(names, lengthCmp);
 
@@ -40,7 +40,7 @@ public class Excepted {
 
         Comparator<String> length = (left, right) -> {
             System.out.println("execute comparator");
-            return left.length() - right.length();
+            return Integer.compare(left.length(), right.length());
         };
         Arrays.sort(name, length);
     }
