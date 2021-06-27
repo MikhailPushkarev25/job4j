@@ -24,7 +24,9 @@ public class Company {
 
     @Override
     public String toString() {
-        return "Company{" + "numEmployees=" + numEmployees + ", post='" + post + '\'' + ", department='" + department + '\'' + ", guide=" + guide + ", averageSalary=" + averageSalary + ", profit=" + profit + ", expenses=" + expenses + '}';
+        return "Company{" + "numEmployees=" + numEmployees + ", post='" + post + '\''
+                + ", department='" + department + '\'' + ", guide=" + guide + ", averageSalary="
+                + averageSalary + ", profit=" + profit + ", expenses=" + expenses + '}';
     }
 
     static class Builder {
