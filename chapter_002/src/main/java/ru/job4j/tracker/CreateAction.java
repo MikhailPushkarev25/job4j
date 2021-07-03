@@ -21,7 +21,6 @@ public class CreateAction implements UserAction {
         return "=== Create a new Item ===";
     }
 
-
     @Override
     public boolean execute(Input input, Store tracker) {
         String name = input.askStr("Enter name: ");

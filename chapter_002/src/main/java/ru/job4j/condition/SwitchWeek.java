@@ -5,8 +5,7 @@ public class SwitchWeek {
     @SuppressWarnings("checkstyle:WhitespaceAround")
     public static String nameOfDay(int day) {
         String name;
-
-        switch(day) {
+        switch (day) {
             case 1:
                 name = "Понедельник";
                 break;
