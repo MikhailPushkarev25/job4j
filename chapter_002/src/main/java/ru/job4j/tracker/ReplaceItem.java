@@ -25,7 +25,7 @@ public class ReplaceItem implements UserAction {
         int id = input.askInt("Enter id: ");
         Item item = new Item(input.askStr("Enter name: "));
         if (tracker.replace(id, item)) {
-            System.out.println("Good. Edit end");
+            System.out.println("Edit item is done");
         } else {
             System.out.println("Error. Edit end");
         }
