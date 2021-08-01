@@ -20,10 +20,11 @@ public class DeleteActionTest {
         Item item = new Item("new Item");
         tracker.add(item);
         DeleteItem deleteItem = new DeleteItem(out);
+        int id = item.getId();
 
         Input input = mock(Input.class);
 
-        when(input.askInt(any(String.class))).thenReturn(1);
+        when(input.askInt(any(String.class))).thenReturn(id);
 
         deleteItem.execute(input, tracker);
 
