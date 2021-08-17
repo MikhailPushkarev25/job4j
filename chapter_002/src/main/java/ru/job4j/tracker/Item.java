@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * @author Mikhail Pushkarev
@@ -10,11 +12,15 @@ import java.time.LocalDateTime;
  * содержит всю необходимую информацию
  * найти можно с пощью класса tracker
  */
+
+@Entity
+@Table(name = "items")
 public class Item {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private LocalDateTime created = LocalDateTime.now();
 
     public Item() {
 
@@ -27,10 +33,6 @@ public class Item {
     public Item(int id, String name) {
         this.name = name;
         this.id = id;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
     }
 
     public int getId() {
@@ -47,6 +49,24 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Item item = (Item) o;
+        return Objects.equals(id, item.id)
+                && Objects.equals(name, item.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
     @Override

@@ -70,9 +70,6 @@ public class StartUI {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
         Item item = new Item();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-        String current = item.getCreated().format(formatter);
-        System.out.println(current);
         System.out.println(item);
         try (Store tracker = new SqlTracker(ConnectionRollback.create(sqlInit()))) {
             tracker.init();
