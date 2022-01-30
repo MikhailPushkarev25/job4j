@@ -42,8 +42,10 @@ public class MemTracker implements Store {
      *  Arrays.copyOf
      */
 
-    public List<Item> findAll() {
-        return list;
+    public void findAll(Observe<Item> observe) {
+        for (Item items : list) {
+            observe.receive(items);
+        }
     }
 
     /**

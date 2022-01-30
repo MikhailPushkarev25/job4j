@@ -3,7 +3,7 @@ import java.util.List;
 
 public final class SingleTracker {
 
-    private MemTracker tracker = new MemTracker();
+    private final MemTracker tracker = new MemTracker();
 
     private static SingleTracker single = null;
 
@@ -22,8 +22,8 @@ public final class SingleTracker {
         return tracker.add(item);
     }
 
-    public List<Item> findAll() {
-        return tracker.findAll();
+    public void findAll() {
+         single.findAll();
     }
 
     public List<Item> findByName(String key) {

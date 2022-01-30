@@ -74,13 +74,12 @@ public class SqlTracker implements Store {
     }
 
     @Override
-    public List<Item> findAll() {
-        List<Item> itemList = new ArrayList<>();
+    public void findAll(Observe<Item> observe) {
         String query = "select * from items";
        try (PreparedStatement statement = cn.prepareStatement(query)) {
            try (ResultSet rs = statement.executeQuery()) {
                while (rs.next()) {
-                   itemList.add(new Item(
+                   observe.receive(new Item(
                            rs.getInt("id"),
                            rs.getString("name")
                    ));
@@ -89,7 +88,6 @@ public class SqlTracker implements Store {
        } catch (SQLException e) {
            e.printStackTrace();
        }
-       return itemList;
     }
 
     @Override
